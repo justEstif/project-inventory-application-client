@@ -28,9 +28,9 @@ type TItem = {
 };
 
 type TState = {
-  categories: TCategory[];
-  brands: TBrand[];
-  items: TItem[];
+  categories: TCategory[] | null;
+  brands: TBrand[] | null;
+  items: TItem[] | null;
   isLoading: boolean;
   isError: boolean;
 };
@@ -63,6 +63,7 @@ const Page = ({ }: Props) => {
           isLoading: false,
           isError: false,
         });
+        console.log(data);
       } catch (error) {
         setData({
           ...data,
@@ -83,36 +84,45 @@ const Page = ({ }: Props) => {
   return (
     <div>
       <div className="flex">
-        {data.categories.map((category) => (
-          <div key={nanoid()} className="flex-1">
-            <p>{category.name}</p>
-            <div className="w-20 rounded-md border-4">
-              <img src={category.image} className="block object-cover w-full" />
+        {data.categories &&
+          data.categories.length &&
+          data.categories.map((category) => (
+            <div key={nanoid()} className="flex-1">
+              <p>{category.name}</p>
+              <div className="w-20 rounded-md border-4">
+                <img
+                  src={category.image}
+                  className="block object-cover w-full"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       <div className="flex">
-        {data.brands.map((brand) => (
-          <div key={nanoid()} className="flex-1">
-            <p>{brand.name}</p>
-            <div className="w-20 rounded-md border-4">
-              <img src={brand.image} className="block object-cover w-full" />
+        {data.brands &&
+          data.brands.length &&
+          data.brands.map((brand) => (
+            <div key={nanoid()} className="flex-1">
+              <p>{brand.name}</p>
+              <div className="w-20 rounded-md border-4">
+                <img src={brand.image} className="block object-cover w-full" />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       <div className="flex">
-        {data.items.map((item) => (
-          <div key={nanoid()} className="flex-1">
-            <p>{item.name}</p>
-            <div className="w-20 rounded-md border-4">
-              <img src={item.image} className="block object-cover w-full" />
+        {data.items &&
+          data.items.length &&
+          data.items.map((item) => (
+            <div key={nanoid()} className="flex-1">
+              <p>{item.name}</p>
+              <div className="w-20 rounded-md border-4">
+                <img src={item.image} className="block object-cover w-full" />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
