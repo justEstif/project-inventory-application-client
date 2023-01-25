@@ -31,7 +31,6 @@ const Page = ({}: Props) => {
           isLoading: false,
           isError: false,
         });
-        console.log(data);
       } catch (error) {
         setData({
           ...data,
